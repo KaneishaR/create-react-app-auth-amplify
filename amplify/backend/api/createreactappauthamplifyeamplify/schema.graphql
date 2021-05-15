@@ -1,0 +1,35 @@
+enum Topic {
+  COREJAVA
+  JAVASCRIPT
+  SPRING
+  MSA
+  REACT
+  AWS
+  DEVOPS
+  SQL
+  HIBERNATE
+  ANGULAR
+  OOP
+  REST
+}
+
+type Answer @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  answerText: String
+  questions: [QuestionAnswer] @connection(keyName: "byAnswer", fields: ["id"])
+}
+
+type Question @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  questionText: String
+  topic: Topic
+  QuestionAnswers: [QuestionAnswer] @connection(keyName: "byQuestion", fields: ["id"])
+}
+
+type QuestionAnswer @model(queries: null) @key(name: "byQuestion", fields: ["questionID", "answerID"]) @key(name: "byAnswer", fields: ["answerID", "questionID"]) @auth(rules: [{allow: public}, {allow: public}]) {
+  id: ID!
+  questionID: ID!
+  answerID: ID!
+  question: Question! @connection(fields: ["questionID"])
+  answer: Answer! @connection(fields: ["answerID"])
+}
