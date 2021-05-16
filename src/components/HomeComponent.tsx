@@ -5,6 +5,7 @@ export interface IHomeProps {
 }
 
 const HomeComponent = (props: IHomeProps) => {
+    
     return(
         <>
             <h1> Welcome, {props.username}</h1>

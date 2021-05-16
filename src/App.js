@@ -9,22 +9,31 @@ Amplify.configure(aws_exports);
 function App() {
 
   // @ts-ignore
-  const [username, setUsername] = useState('test');
+  const [username, setUsername] = useState('');
 
-  async function getUserInfo() {
-    const user = await Auth.currentAuthenticatedUser();
-    console.log('attributes:', user.attributes);
+  let   getUserInfo = async () => {
+    const user1 = await Auth.currentAuthenticatedUser();
+    setUsername(user1.username)
+    console.log(user1.username)
+    console.log(username)
   }
+
+  
   
     return (
       <div className="App">
-        <button onClick="getUserInfo()">Click Me</button>
+        <button onClick={getUserInfo}>Click Me</button>
         <Router>
+          {username ? 
+          <Redirect />
+          : 
           <Switch>
-            <Route path="/home" render={() => <HomeComponent username={this.username}/>} />
+            <Route path="/home" render={() => <HomeComponent username={username} />} />
           </Switch>
+          }
         </Router>
-      </div>
+      </div> 
+      
     );
 
 }
