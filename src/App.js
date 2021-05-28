@@ -10,6 +10,7 @@ import { withAuthenticator } from 'aws-amplify-react'
 import Amplify, { Auth } from 'aws-amplify';
 import aws_exports from './aws-exports';
 import HomeComponent from './components/HomeComponent';
+import NewQuestionComponent from './components/NewQuestionComponent/NewQuestionContainer';
 Amplify.configure(aws_exports);
 
 function App() {
@@ -26,11 +27,17 @@ function App() {
               </Typography>
             </Toolbar>
           </AppBar>
-
+          <Switch>
+            <Route path='/home' render={() => <HomeComponent />} />
+            <Route path='/question' render={() => <NewQuestionComponent />} />
+            
+          </Switch>
           </Router>
         </Provider>
       </div>
     );
+
+    
 
 }
 

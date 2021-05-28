@@ -10,6 +10,7 @@ export async function addQuestion(question: Question){
     );
 };
 
+
 export async function getQuestionById(id: number){
     return await DataStore.query(Question, id.toString());
 }
